@@ -1,5 +1,5 @@
 //
-//  swiftui_samplesApp.swift
+//  SwiftuiSamplesApp.swift
 //  swiftui-samples
 //
 //  Created by pino on 05.01.26.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct swiftui_samplesApp: App {
+struct SwiftuiSamplesApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

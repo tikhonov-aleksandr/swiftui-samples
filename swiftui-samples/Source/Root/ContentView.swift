@@ -16,8 +16,8 @@ struct ContentView: View {
             List(filteredRoutes) { route in
                 NavigationLink(route.title, value: route)
             }
-            .navigationTitle("Samples")
-            .searchable(text: $searchText, prompt: "Search samples")
+            .navigationTitle("SwiftUI samples")
+            .searchable(text: $searchText, prompt: "Search")
             .routeDestination()
         }
     }
