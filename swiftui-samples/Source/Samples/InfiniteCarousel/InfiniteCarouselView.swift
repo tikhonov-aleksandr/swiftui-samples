@@ -23,7 +23,11 @@ struct InfiniteCarouselView<Item, Content: View>: View {
     }
 
     var body: some View {
-        carouselBody
+        if items.isEmpty {
+            preconditionFailure("Items should not be empty")
+        } else {
+            carouselBody
+        }
     }
 
     private var baseScrollView: some View {
