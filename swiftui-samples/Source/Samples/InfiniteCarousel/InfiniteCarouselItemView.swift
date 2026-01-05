@@ -10,7 +10,7 @@ import SwiftUI
 struct InfiniteCarouselItemView: View {
     
     let item: Int
-    @State var value: Int = 0
+    @Binding var value: Int
     
     var body: some View {
         ZStack {
@@ -41,5 +41,5 @@ struct InfiniteCarouselItemView: View {
 
 
 #Preview {
-    InfiniteCarouselItemView(item: 5)
+    InfiniteCarouselItemView(item: 5, value: .constant(0))
 }
