@@ -62,19 +62,23 @@ struct InfiniteCarouselView<Item, Content: View>: View {
     }
 
     private func handleSettled(at position: Int) {
-        if position == 0 {
+        switch position {
+        case 0:
             currentIndex = wrappedIndex(currentIndex - 1)
             jump(to: 1)
-        } else if position == 2 {
+        case 2:
             currentIndex = wrappedIndex(currentIndex + 1)
             jump(to: 1)
+        default:
+            break
         }
     }
 
     private func wrappedIndex(_ index: Int) -> Int {
         let count = items.count
         let value = index % count
-        return value >= 0 ? value : value + count
+        let index = value >= 0 ? value : value + count
+        return index
     }
 
     private func jump(to index: Int) {
