@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var searchText = ""
+
     var body: some View {
         NavigationStack {
-            List(SampleRoute.allCases) { route in
+            List(filteredRoutes) { route in
                 NavigationLink(route.title, value: route)
             }
             .navigationTitle("Samples")
+            .searchable(text: $searchText, prompt: "Search samples")
             .routeDestination()
+        }
+    }
+    
+    private var filteredRoutes: [SampleRoute] {
+        let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return SampleRoute.allCases }
+        return SampleRoute.allCases.filter { route in
+            route.title.localizedCaseInsensitiveContains(trimmed)
         }
     }
 }
