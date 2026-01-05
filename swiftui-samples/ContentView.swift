@@ -9,13 +9,41 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(SampleRoute.allCases) { route in
+                NavigationLink(route.title, value: route)
+            }
+            .navigationTitle("Samples")
+            .routeDestination()
         }
-        .padding()
+    }
+}
+
+struct ProfileSampleView: View {
+    var body: some View {
+        Text("Profile sample screen.")
+            .navigationTitle("Profile")
+    }
+}
+
+struct SettingsSampleView: View {
+    var body: some View {
+        Text("Settings sample screen.")
+            .navigationTitle("Settings")
+    }
+}
+
+struct AboutSampleView: View {
+    var body: some View {
+        Text("About sample screen.")
+            .navigationTitle("About")
+    }
+}
+
+struct ExperimentsSampleView: View {
+    var body: some View {
+        Text("Experiments sample screen.")
+            .navigationTitle("Experiments")
     }
 }
 
