@@ -18,7 +18,7 @@ struct InfiniteCarouselSampleView: View {
             Text("Swipe left or right")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            InfiniteCarouselView(items: items) { item in
+            InfiniteCarouselView(items: items, id: { $0 }) { item in
                 InfiniteCarouselItemView(item: item)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)

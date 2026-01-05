@@ -7,18 +7,25 @@
 
 import SwiftUI
 
-struct InfiniteCarouselView<Item, Content: View>: View {
+struct InfiniteCarouselView<Item, ID: Hashable, Content: View>: View {
     
     let items: [Item]
     let spacing: CGFloat?
+    let id: (Item) -> ID
     let content: (Item) -> Content
 
     @State private var currentIndex = 0
     @State private var scrollPosition: Int?
 
-    init(items: [Item], spacing: CGFloat? = nil, @ViewBuilder content: @escaping (Item) -> Content) {
+    init(
+        items: [Item],
+        spacing: CGFloat? = nil,
+        id: @escaping (Item) -> ID,
+        @ViewBuilder content: @escaping (Item) -> Content
+    ) {
         self.items = items
         self.spacing = spacing
+        self.id = id
         self.content = content
     }
 
@@ -50,9 +57,12 @@ struct InfiniteCarouselView<Item, Content: View>: View {
     }
     
     private func contentView(item: Item, slotId: Int) -> some View {
-        content(item)
-            .containerRelativeFrame(.horizontal)
-            .id(slotId)
+        ZStack {
+            content(item)
+                .containerRelativeFrame(.horizontal)
+                .id(id(item))
+        }
+        .id(slotId)
     }
 
     @ViewBuilder
