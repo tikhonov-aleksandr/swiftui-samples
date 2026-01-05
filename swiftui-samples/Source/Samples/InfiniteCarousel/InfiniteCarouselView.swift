@@ -33,15 +33,9 @@ struct InfiniteCarouselView<Item, Content: View>: View {
     private var baseScrollView: some View {
         ScrollView(.horizontal) {
             HStack(spacing: spacing) {
-                content(items[wrappedIndex(currentIndex - 1)])
-                    .containerRelativeFrame(.horizontal)
-                    .id(0)
-                content(items[wrappedIndex(currentIndex)])
-                    .containerRelativeFrame(.horizontal)
-                    .id(1)
-                content(items[wrappedIndex(currentIndex + 1)])
-                    .containerRelativeFrame(.horizontal)
-                    .id(2)
+                contentView(item: items[wrappedIndex(currentIndex - 1)], slotId: 0)
+                contentView(item: items[wrappedIndex(currentIndex)], slotId: 1)
+                contentView(item: items[wrappedIndex(currentIndex + 1)], slotId: 2)
             }
             .scrollTargetLayout()
         }
@@ -53,6 +47,12 @@ struct InfiniteCarouselView<Item, Content: View>: View {
                 jump(to: 1)
             }
         }
+    }
+    
+    private func contentView(item: Item, slotId: Int) -> some View {
+        content(item)
+            .containerRelativeFrame(.horizontal)
+            .id(slotId)
     }
 
     @ViewBuilder

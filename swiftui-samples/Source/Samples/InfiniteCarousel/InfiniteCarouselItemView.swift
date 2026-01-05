@@ -10,6 +10,7 @@ import SwiftUI
 struct InfiniteCarouselItemView: View {
     
     let item: Int
+    @State var value: Int = 0
     
     var body: some View {
         ZStack {
@@ -19,9 +20,21 @@ struct InfiniteCarouselItemView: View {
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .stroke(Color.blue.opacity(0.2), lineWidth: 1)
                 )
-            Text("Item \(item)")
-                .font(.system(size: 34, weight: .semibold, design: .rounded))
-                .foregroundStyle(.blue)
+            
+            VStack(alignment: .leading) {
+                Text("Item \(item)")
+                HStack(spacing: 16) {
+                    Button("-") {
+                        value -= 1
+                    }
+                    Text("Value \(value)")
+                    Button("+") {
+                        value += 1
+                    }
+                }
+            }
+            .font(.system(size: 34, weight: .semibold, design: .rounded))
+            .foregroundStyle(.blue)
         }
     }
 }
