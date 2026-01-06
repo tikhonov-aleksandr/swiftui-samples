@@ -44,7 +44,7 @@ struct InfiniteCarouselView<Item, Content: View>: View where Item: Identifiable 
             .scrollTargetLayout()
         }
         .scrollIndicators(.hidden)
-        .scrollTargetBehavior(.paging)
+        .scrollTargetBehavior(.viewAligned)
         .scrollPosition(id: $scrollPosition)
         .onAppear {
             if scrollPosition == nil {
