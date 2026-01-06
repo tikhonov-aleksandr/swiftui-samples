@@ -9,15 +9,7 @@ import SwiftUI
 
 struct InfiniteCarouselSampleView: View {
     
-    private let items = Array(1...5)
-    @State private var values: [Int: Int] = [:]
-
-    private func valueBinding(for item: Int) -> Binding<Int> {
-        Binding(
-            get: { values[item, default: 0] },
-            set: { values[item] = $0 }
-        )
-    }
+    @State private var items = InfiniteCarouselItem.data()
 
     var body: some View {
         VStack(spacing: 20) {
@@ -26,8 +18,8 @@ struct InfiniteCarouselSampleView: View {
             Text("Swipe left or right")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            InfiniteCarouselView(items: items, id: { $0 }) { item in
-                InfiniteCarouselItemView(item: item, value: valueBinding(for: item))
+            InfiniteCarouselView(items: items) { item in
+                InfiniteCarouselItemView(item: item)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
             }

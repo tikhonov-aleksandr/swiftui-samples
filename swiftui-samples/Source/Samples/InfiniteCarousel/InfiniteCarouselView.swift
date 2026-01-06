@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct InfiniteCarouselView<Item, ID: Hashable, Content: View>: View {
+struct InfiniteCarouselView<Item, Content: View>: View where Item: Identifiable {
     
     let items: [Item]
     let spacing: CGFloat?
-    let id: (Item) -> ID
     let content: (Item) -> Content
 
     @State private var currentIndex = 0
@@ -20,12 +19,10 @@ struct InfiniteCarouselView<Item, ID: Hashable, Content: View>: View {
     init(
         items: [Item],
         spacing: CGFloat? = nil,
-        id: @escaping (Item) -> ID,
         @ViewBuilder content: @escaping (Item) -> Content
     ) {
         self.items = items
         self.spacing = spacing
-        self.id = id
         self.content = content
     }
 
@@ -60,7 +57,7 @@ struct InfiniteCarouselView<Item, ID: Hashable, Content: View>: View {
         ZStack {
             content(item)
                 .containerRelativeFrame(.horizontal)
-                .id(id(item))
+                .id(item.id)
         }
         .id(slotId)
     }

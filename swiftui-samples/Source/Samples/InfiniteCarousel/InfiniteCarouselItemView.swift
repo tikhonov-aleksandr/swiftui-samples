@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
+import Observation
 
 struct InfiniteCarouselItemView: View {
     
-    let item: Int
-    @Binding var value: Int
+    @Bindable var item: InfiniteCarouselItem
     
     var body: some View {
         ZStack {
@@ -21,15 +21,15 @@ struct InfiniteCarouselItemView: View {
                         .stroke(Color.blue.opacity(0.2), lineWidth: 1)
                 )
             
-            VStack(alignment: .leading) {
-                Text("Item \(item)")
+            VStack(alignment: .center) {
+                Text("Item: \(item.name)")
                 HStack(spacing: 16) {
                     Button("-") {
-                        value -= 1
+                        item.value -= 1
                     }
-                    Text("Value \(value)")
+                    Text("Value: \(item.value)")
                     Button("+") {
-                        value += 1
+                        item.value += 1
                     }
                 }
             }
@@ -41,5 +41,5 @@ struct InfiniteCarouselItemView: View {
 
 
 #Preview {
-    InfiniteCarouselItemView(item: 5, value: .constant(0))
+    InfiniteCarouselItemView(item: .init(name: "Item 1", value: 2))
 }
